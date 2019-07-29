@@ -1,0 +1,70 @@
+{
+	"extends": "eslint:recommended",
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"globals": {
+		"Promise": "readonly",
+		"Symbol": "readonly",
+		"Map": "readonly",
+		"Set": "readonly"
+	},
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"allowImportExportEverywhere": true
+	},
+	"rules": {
+		"no-trailing-spaces": "warn",
+		"no-console": "warn",
+		"no-shadow": "error",
+		"eqeqeq": "error",
+		"no-var": "error",
+		"curly": "error",
+		"one-var": [
+			"error",
+			"never"
+		],
+		"max-lines": [
+			"warn",
+			{
+				"max": 300,
+				"skipBlankLines": true,
+				"skipComments": true
+			}
+		],
+		"max-len": [
+			"warn",
+			{
+				"code": 180,
+				"tabWidth": 4,
+				"comments": 180,
+				"ignoreUrls": true,
+				"ignoreTemplateLiterals": false,
+				"ignoreRegExpLiterals": true
+			}
+		],
+		"indent": [
+			"warn",
+			"tab",
+			{
+				"SwitchCase": 1,
+				"ObjectExpression": 1
+			}
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"quotes": [
+			"error",
+			"single"
+		]
+	}
+}

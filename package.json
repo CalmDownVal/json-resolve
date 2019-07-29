@@ -1,0 +1,33 @@
+{
+	"name": "@calmdownval/json-resolve",
+	"version": "0.0.1",
+	"type": "module",
+	"main": "src/index.mjs",
+	"typings": "src/index.d.ts",
+	"license": "GPL-3.0-or-later",
+	"description": "JSON $ref resolver",
+	"keywords": [
+		"JSON",
+		"ref",
+		"reference",
+		"resolver"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vaclavlahuta/json-resolve.git"
+	},
+	"engines": {
+		"node": ">=12.0.0"
+	},
+	"devDependencies": {
+		"cross-env": "^5.2.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4"
+	},
+	"scripts": {
+		"test": "cross-env NODE_OPTIONS=\"--experimental-modules\" mocha --delay script/test.esm.js"
+	},
+	"dependencies": {
+		"@calmdownval/slow-deep-equal": "^1.0.0"
+	}
+}
