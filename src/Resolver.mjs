@@ -1,4 +1,4 @@
-import equal from '@calmdownval/slow-deep-equal';
+import { equal } from '@calmdownval/slow-deep-equal';
 import { resolveURI, splitFragment } from './URI.mjs';
 import { unrefPtr, unrefId } from './pointers.mjs';
 
@@ -12,9 +12,12 @@ function removeFragment(uri)
 			: null;
 }
 
-export default class Resolver
+export class Resolver
 {
-	#store = new Map();
+	constructor()
+	{
+		this.store = new Map();
+	}
 
 	add(document, uri)
 	{
@@ -40,10 +43,10 @@ export default class Resolver
 		uri = resolveURI(uri);
 
 		// add the root itself
-		this.#add(document, uri);
+		this.addDocument(document, uri);
 
 		// add any sub-documents
-		this.#scanSubDocuments(document, uri);
+		this.scanSubDocuments(document, uri);
 	}
 
 	delete(uri)
@@ -54,7 +57,7 @@ export default class Resolver
 			return false;
 		}
 
-		return this.#store.delete(resolveURI(uri));
+		return this.store.delete(resolveURI(uri));
 	}
 
 	get(uri, root)
@@ -73,7 +76,7 @@ export default class Resolver
 		else
 		{
 			baseURI = resolveURI(baseURI);
-			document = this.#store.get(baseURI);
+			document = this.store.get(baseURI);
 			if (document === undefined)
 			{
 				throw new Error(`Could not find document '${baseURI}'.`);
@@ -126,25 +129,23 @@ export default class Resolver
 		}
 
 		// scan for references
-		const temp = this.#resolveRefs(document, document, uri);
+		const temp = this.resolveRefs(document, document, uri);
 
 		// resolution only returns when a $ref is encountered and cloning is needed
 		return temp === undefined ? document : temp;
 	}
 
-	// FUTURE: use private method syntax
-	#add = (document, uri) =>
+	addDocument(document, uri)
 	{
-		const previous = this.#store.get(uri);
+		const previous = this.store.get(uri);
 		if (previous !== undefined && !equal(previous, document))
 		{
 			throw new Error(`Document '${uri}' was already added with a different structure.`);
 		}
-		this.#store.set(uri, document);
-	};
+		this.store.set(uri, document);
+	}
 
-	// FUTURE: use private method syntax
-	#scanSubDocuments = (document, baseURI, __top = true) =>
+	scanSubDocuments(document, baseURI, __top = true)
 	{
 		if (document && typeof document === 'object')
 		{
@@ -154,7 +155,7 @@ export default class Resolver
 				if (uri)
 				{
 					baseURI = resolveURI(uri, baseURI);
-					this.#add(document, baseURI);
+					this.addDocument(document, baseURI);
 				}
 			}
 
@@ -163,21 +164,20 @@ export default class Resolver
 				const length = document.length;
 				for (let i = 0; i < length; ++i)
 				{
-					this.#scanSubDocuments(document[i], baseURI, false);
+					this.scanSubDocuments(document[i], baseURI, false);
 				}
 			}
 			else
 			{
 				for (const key in document)
 				{
-					this.#scanSubDocuments(document[key], baseURI, false);
+					this.scanSubDocuments(document[key], baseURI, false);
 				}
 			}
 		}
-	};
+	}
 
-	// FUTURE: use private method syntax
-	#resolveRefs = (root, document, baseURI, __top = true) =>
+	resolveRefs(root, document, baseURI, __top = true)
 	{
 		if (document && typeof document === 'object')
 		{
@@ -206,7 +206,7 @@ export default class Resolver
 				for (let i = 0; i < length; ++i)
 				{
 					let item = document[i];
-					const temp = this.#resolveRefs(root, item, baseURI, false);
+					const temp = this.resolveRefs(root, item, baseURI, false);
 					if (temp !== undefined)
 					{
 						item = temp;
@@ -221,7 +221,7 @@ export default class Resolver
 				for (const key in document)
 				{
 					let item = document[key];
-					const temp = this.#resolveRefs(root, item, baseURI, false);
+					const temp = this.resolveRefs(root, item, baseURI, false);
 					if (temp !== undefined)
 					{
 						item = temp;
@@ -236,5 +236,5 @@ export default class Resolver
 				return clone;
 			}
 		}
-	};
+	}
 }

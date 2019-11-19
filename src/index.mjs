@@ -1,4 +1,4 @@
-import Resolver from './Resolver.mjs';
+import { Resolver } from './Resolver.mjs';
 
 /**
  * Scans a document and returns a clone with resolved $refs.
@@ -11,5 +11,4 @@ function resolve(document, uri)
 	return resolver.resolve(document, uri);
 }
 
-export default { Resolver, resolve };
-export { Resolver, resolve };
+export { resolve, Resolver };

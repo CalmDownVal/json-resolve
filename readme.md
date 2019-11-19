@@ -1,17 +1,20 @@
 # JSON Resolver
-**This module uses the ES modules and private fields features and requires Node v12.0.0+.
-Please refer to [Node's documentation](https://nodejs.org/api/esm.html#esm_enabling) to read
+
+**This module uses the ES modules and requires Node v8.15.0+. Please refer to
+[Node's documentation](https://nodejs.org/api/esm.html#esm_enabling) to read
 more on how to enable this functionality in your environment.**
 
-URI-aware resolver module for JSON `$ref` references.
-More tests and some basic performance checks are still a ToDo. Use at your own risk.
+URI-aware resolver module for JSON `$ref` references. More tests and some basic
+performance checks are still a ToDo. Use at your own risk.
 
 ## Installation
-```
+
+```sh
 npm install @calmdownval/json-resolve
 ```
 
 ## Features
+
 - both absolute and relative pointers are available
 - relative pointers support referencing of array indexes and object keys
 - understands $id and resolves both relative and absolute URIs
@@ -20,11 +23,14 @@ npm install @calmdownval/json-resolve
 - includes tests
 
 ## Usage
-You can either pass a structure to the `resolve` function and get a resolved copy of it
-or create a `new Resolver` instance and traverse the object using its methods.
-This is useful especially when dealing with multiple structures that link to one another
-or when only interested in a select part of a large structure. In either case the input
-structures will not be modified in any way, ever.
+
+You can either pass a structure to the `resolve` function and get a resolved
+copy of it or create a `new Resolver` instance and traverse the object using its
+methods. This is useful especially when dealing with multiple structures that
+link to one another or when only interested in a select part of a large
+structure. In either case the input structures will not be modified in any way,
+ever.
+
 ```js
 import { resolve } from '@calmdownval/json-resolve';
 
@@ -42,7 +48,9 @@ const object = {
 
 const resolved = resolve(object);
 ```
+
 `resolved` will now contain the following structure:
+
 ```js
 {
   maths: {
@@ -56,7 +64,10 @@ const resolved = resolve(object);
   }
 }
 ```
-Using `Resolver` you can add multiple structures to solve complex cross-document references.
+
+Using `Resolver` you can add multiple structures to solve complex cross-document
+references.
+
 ```js
 import { Resolver } from '@calmdownval/json-resolve';
 
@@ -84,7 +95,9 @@ resolver.add(doc2, 'operations.json'); // doc2 misses $id; provide its URI via a
 
 const resolved = resolver.resolve(object);
 ```
+
 `resolved` will now contain the following structure:
+
 ```js
 {
   $id: 'calc/simple.json',

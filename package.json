@@ -1,9 +1,9 @@
 {
 	"name": "@calmdownval/json-resolve",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"type": "module",
 	"main": "src/index.mjs",
-	"typings": "src/index.d.ts",
+	"types": "src/index.d.ts",
 	"license": "GPL-3.0-or-later",
 	"description": "JSON $ref resolver",
 	"keywords": [
@@ -17,17 +17,17 @@
 		"url": "https://github.com/vaclavlahuta/json-resolve.git"
 	},
 	"engines": {
-		"node": ">=12.0.0"
+		"node": ">=8.15.0"
 	},
 	"devDependencies": {
-		"cross-env": "^5.2.0",
-		"glob": "^7.1.4",
-		"mocha": "^6.1.4"
+		"cross-env": "^6.0.3",
+		"glob": "^7.1.6",
+		"mocha": "^6.2.2"
 	},
 	"scripts": {
-		"test": "cross-env NODE_OPTIONS=\"--experimental-modules\" mocha --delay script/test.esm.js"
+		"test": "cross-env NODE_OPTIONS=\"--experimental-modules\" mocha --delay script/mocha.cjs"
 	},
 	"dependencies": {
-		"@calmdownval/slow-deep-equal": "^1.0.0"
+		"@calmdownval/slow-deep-equal": "^1.0.1"
 	}
 }
