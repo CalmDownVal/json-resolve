@@ -1,6 +1,6 @@
 {
 	"name": "@calmdownval/json-resolve",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"type": "module",
 	"main": "src/index.mjs",
 	"types": "src/index.d.ts",
@@ -20,14 +20,14 @@
 		"node": ">=8.15.0"
 	},
 	"devDependencies": {
-		"cross-env": "^6.0.3",
-		"glob": "^7.1.6",
-		"mocha": "^6.2.2"
+		"cross-env": "7.x.x",
+		"glob": "7.x.x",
+		"mocha": "7.x.x"
 	},
 	"scripts": {
 		"test": "cross-env NODE_OPTIONS=\"--experimental-modules\" mocha --delay script/mocha.cjs"
 	},
 	"dependencies": {
-		"@calmdownval/slow-deep-equal": "^1.0.1"
+		"@calmdownval/slow-deep-equal": "1.0.2"
 	}
 }

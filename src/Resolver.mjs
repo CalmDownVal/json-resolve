@@ -1,4 +1,4 @@
-import { equal } from '@calmdownval/slow-deep-equal';
+import equal from '@calmdownval/slow-deep-equal';
 import { resolveURI, splitFragment } from './URI.mjs';
 import { unrefPtr, unrefId } from './pointers.mjs';
 
