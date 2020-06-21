@@ -14,7 +14,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/vaclavlahuta/json-resolve.git"
+		"url": "https://github.com/CalmDownVal/json-resolve.git"
 	},
 	"engines": {
 		"node": ">=8.15.0"
